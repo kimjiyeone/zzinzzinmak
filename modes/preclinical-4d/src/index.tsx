@@ -1,9 +1,12 @@
 import { id } from './id';
 import { hotkeys } from '@ohif/core';
+import * as cornerstoneExtension from '@ohif/extension-cornerstone';
 import initWorkflowSteps from './initWorkflowSteps';
 import initToolGroups from './initToolGroups';
 import toolbarButtons from './toolbarButtons';
 import segmentationButtons from './segmentationButtons';
+
+const { volumeLoaderUtil } = cornerstoneExtension.utils;
 
 const extensionDependencies = {
   '@ohif/extension-default': '3.7.0-beta.76',
@@ -48,6 +51,9 @@ function modeFactory({ modeConfiguration }) {
         viewportGridService,
       } = servicesManager.services;
 
+      // Enable 4D mode to allow splitting series into timepoints
+      volumeLoaderUtil.enable4DMode();
+
       const utilityModule = extensionManager.getModuleEntry(
         '@ohif/extension-cornerstone.utilityModule.tools'
       );
@@ -91,13 +97,16 @@ function modeFactory({ modeConfiguration }) {
       // it may change the protocol/stage based on workflow stage settings
       initWorkflowSteps({ servicesManager });
     },
-    onModeExit: ({ servicesManager }: withAppTypes) => {
+    onModeExit: ({ servicesManager, extensionManager }: withAppTypes) => {
       const {
         toolGroupService,
         syncGroupService,
         segmentationService,
         cornerstoneViewportService,
       } = servicesManager.services;
+
+      // Turn 4D mode off to move back to its initial state.
+      volumeLoaderUtil.disable4DMode();
 
       toolGroupService.destroy();
       syncGroupService.destroy();
