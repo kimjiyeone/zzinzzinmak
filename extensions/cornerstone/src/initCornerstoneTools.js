@@ -2,7 +2,6 @@ import {
   PanTool,
   WindowLevelTool,
   StackScrollTool,
-  StackScrollMouseWheelTool,
   ZoomTool,
   VolumeRotateMouseWheelTool,
   MIPJumpToClickTool,
@@ -19,7 +18,6 @@ import {
   CobbAngleTool,
   MagnifyTool,
   CrosshairsTool,
-  SegmentationDisplayTool,
   RectangleScissorsTool,
   SphereScissorsTool,
   CircleScissorsTool,
@@ -51,7 +49,6 @@ export default function initCornerstoneTools(configuration = {}) {
   init(configuration);
   addTool(PanTool);
   addTool(WindowLevelTool);
-  addTool(StackScrollMouseWheelTool);
   addTool(StackScrollTool);
   addTool(ZoomTool);
   addTool(ProbeTool);
@@ -69,7 +66,6 @@ export default function initCornerstoneTools(configuration = {}) {
   addTool(CobbAngleTool);
   addTool(MagnifyTool);
   addTool(CrosshairsTool);
-  addTool(SegmentationDisplayTool);
   addTool(RectangleScissorsTool);
   addTool(SphereScissorsTool);
   addTool(CircleScissorsTool);
@@ -108,7 +104,6 @@ const toolNames = {
   ArrowAnnotate: ArrowAnnotateTool.toolName,
   WindowLevel: WindowLevelTool.toolName,
   StackScroll: StackScrollTool.toolName,
-  StackScrollMouseWheel: StackScrollMouseWheelTool.toolName,
   Zoom: ZoomTool.toolName,
   VolumeRotateMouseWheel: VolumeRotateMouseWheelTool.toolName,
   MipJumpToClick: MIPJumpToClickTool.toolName,
@@ -124,7 +119,6 @@ const toolNames = {
   CobbAngle: CobbAngleTool.toolName,
   Magnify: MagnifyTool.toolName,
   Crosshairs: CrosshairsTool.toolName,
-  SegmentationDisplay: SegmentationDisplayTool.toolName,
   Brush: BrushTool.toolName,
   PaintFill: PaintFillTool.toolName,
   ReferenceLines: ReferenceLinesTool.toolName,

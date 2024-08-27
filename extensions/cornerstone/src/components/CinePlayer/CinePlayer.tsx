@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { CinePlayer, useCine } from '@ohif/ui';
 import { Enums, eventTarget, cache } from '@cornerstonejs/core';
-import { Enums as StreamingEnums } from '@cornerstonejs/streaming-image-volume-loader';
 import { useAppConfig } from '@state';
 
 function WrappedCinePlayer({
@@ -101,7 +100,7 @@ function WrappedCinePlayer({
       return;
     }
 
-    eventTarget.addEventListener(Enums.Events.STACK_VIEWPORT_NEW_STACK, newDisplaySetHandler);
+    enabledVPElement.addEventListener(Enums.Events.STACK_VIEWPORT_NEW_STACK, newDisplaySetHandler);
     // this doesn't makes sense that we are listening to this event on viewport element
     enabledVPElement.addEventListener(
       Enums.Events.VOLUME_VIEWPORT_NEW_VOLUME,
@@ -111,7 +110,10 @@ function WrappedCinePlayer({
     return () => {
       cineService.setCine({ id: viewportId, isPlaying: false });
 
-      eventTarget.removeEventListener(Enums.Events.STACK_VIEWPORT_NEW_STACK, newDisplaySetHandler);
+      enabledVPElement.removeEventListener(
+        Enums.Events.STACK_VIEWPORT_NEW_STACK,
+        newDisplaySetHandler
+      );
       enabledVPElement.removeEventListener(
         Enums.Events.VOLUME_VIEWPORT_NEW_VOLUME,
         newDisplaySetHandler
