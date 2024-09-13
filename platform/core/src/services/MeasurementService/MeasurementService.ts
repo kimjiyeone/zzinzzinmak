@@ -479,6 +479,14 @@ class MeasurementService extends PubSubService {
       );
       if (!sourceMapping) {
         console.log('No source mapping', source);
+        this.unmappedMeasurements.set(sourceAnnotationDetail.uid, {
+          ...sourceAnnotationDetail,
+          source: {
+            name: source.name,
+            version: source.version,
+            uid: source.uid,
+          },
+        });
         return;
       }
       const { toMeasurementSchema } = sourceMapping;

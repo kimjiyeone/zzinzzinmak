@@ -9,6 +9,7 @@ import {
   LengthTool,
   PlanarFreehandROITool,
   RectangleROITool,
+  ProbeTool,
 } from '@cornerstonejs/tools';
 import DICOMSRDisplayTool from './tools/DICOMSRDisplayTool';
 import addToolInstance from './utils/addToolInstance';
@@ -18,7 +19,10 @@ import toolNames from './tools/toolNames';
 /**
  * @param {object} configuration
  */
-export default function init({ configuration = {} }: Types.Extensions.ExtensionParams): void {
+export default function init({
+  configuration = {},
+  servicesManager,
+}: Types.Extensions.ExtensionParams): void {
   addToolInstance(toolNames.DICOMSRDisplay, DICOMSRDisplayTool);
   addToolInstance(toolNames.SRLength, LengthTool);
   addToolInstance(toolNames.SRBidirectional, BidirectionalTool);
@@ -28,6 +32,7 @@ export default function init({ configuration = {} }: Types.Extensions.ExtensionP
   addToolInstance(toolNames.SRAngle, AngleTool);
   addToolInstance(toolNames.SRPlanarFreehandROI, PlanarFreehandROITool);
   addToolInstance(toolNames.SRRectangleROI, RectangleROITool);
+  addToolInstance(toolNames.SCOORD3DPoint, ProbeTool, { useViewReference: true });
 
   // TODO - fix the SR display of Cobb Angle, as it joins the two lines
   addToolInstance(toolNames.SRCobbAngle, CobbAngleTool);
